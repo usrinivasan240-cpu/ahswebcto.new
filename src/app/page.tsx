@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import WhyAutomation from "@/components/WhyAutomation";
 import Pricing from "@/components/Pricing";
+import HolographicUI from "@/components/HolographicUI";
 
 export default function Home() {
   return (
@@ -10,6 +11,9 @@ export default function Home() {
       <Services />
       <WhyAutomation />
       <Pricing />
+      
+      {/* Holographic UI Section */}
+      <HolographicUI />
       
       {/* Final CTA */}
       <section className="py-24 bg-accent relative overflow-hidden">
