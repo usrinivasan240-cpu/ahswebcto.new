@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Cpu, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Cpu, Instagram, Youtube, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -23,6 +23,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent transition-all duration-300"
+                aria-label="Instagram"
               >
                 <Instagram size={20} />
               </a>
@@ -31,8 +32,18 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent transition-all duration-300"
+                aria-label="YouTube"
               >
                 <Youtube size={20} />
+              </a>
+              <a
+                href="https://wa.me/919940918442"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-green-500 hover:border-green-500 transition-all duration-300"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={20} />
               </a>
             </div>
           </div>

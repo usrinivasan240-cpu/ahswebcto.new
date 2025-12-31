@@ -34,7 +34,7 @@ const plans = [
     popular: false,
   },
   {
-    name: "Standard Plan",
+    name: "Pro Plan",
     price: "₹5,000",
     description: "Most popular for growing teams",
     features: [
@@ -45,7 +45,7 @@ const plans = [
       "Priority Support",
       "Detailed Performance Reports",
     ],
-    cta: "Go Standard",
+    cta: "Go Pro",
     popular: true,
   },
   {

@@ -3,9 +3,9 @@
 import { useState } from "react";
 import SectionHeading from "@/components/SectionHeading";
 import GlassCard from "@/components/GlassCard";
-import { db } from "@/lib/firebase";
+import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2, MessageCircle, AlertCircle } from "lucide-react";
 
 export default function SetupPage() {
   const [loading, setLoading] = useState(false);
@@ -16,6 +16,12 @@ export default function SetupPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+
+    if (!isFirebaseConfigured) {
+      setError("Form submission is currently unavailable. Please use WhatsApp for faster response.");
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -65,12 +71,34 @@ export default function SetupPage() {
   return (
     <div className="py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading 
-          title="Chatbot Setup Form" 
+        <SectionHeading
+          title="Chatbot Setup Form"
           subtitle="Tell us about your business and automation needs to get started."
         />
 
-        <GlassCard className="mt-12">
+        {/* Quick WhatsApp Contact */}
+        <div className="mt-8 p-6 glass border border-white/10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+              <MessageCircle className="w-6 h-6 text-green-500" />
+            </div>
+            <div>
+              <h3 className="font-semibold">Need faster response?</h3>
+              <p className="text-sm text-gray-400">Chat directly with us on WhatsApp</p>
+            </div>
+          </div>
+          <a
+            href="https://wa.me/919940918442"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold flex items-center space-x-2 transition-all"
+          >
+            <MessageCircle className="w-5 h-5" />
+            <span>Chat Now</span>
+          </a>
+        </div>
+
+        <GlassCard className="mt-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
@@ -161,7 +189,28 @@ export default function SetupPage() {
               />
             </div>
 
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && (
+              <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-start space-x-3">
+                <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-red-500 text-sm">{error}</p>
+                  <p className="text-gray-400 text-xs mt-2">
+                    Alternatively, contact us directly via WhatsApp at +91 9940918442
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* No Refund Policy Notice */}
+            <div className="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl flex items-start space-x-3">
+              <AlertCircle className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-yellow-500 text-sm font-semibold">Important Notice</p>
+                <p className="text-gray-400 text-xs mt-1">
+                  We follow a strict No Refund Policy. Please review your requirements carefully before submitting.
+                </p>
+              </div>
+            </div>
 
             <button
               disabled={loading}

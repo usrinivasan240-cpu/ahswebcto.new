@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AutoHub Solutions - Official Website
+
+A modern, responsive website for AutoHub Solutions, showcasing AI-powered WhatsApp automation and chatbot services.
+
+## Tech Stack
+
+- **Frontend**: Next.js 16 with React 19
+- **Styling**: Tailwind CSS v4 with custom dark theme
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Database**: Firebase (Firestore)
+- **Fonts**: Inter & Space Grotesk (Google Fonts)
+
+## Features
+
+- 🎨 Modern dark theme with blue gradient accents (#0A0F2C, #0B5ED7)
+- 📱 Fully responsive design (mobile-first)
+- ✨ Smooth animations and transitions
+- 💬 WhatsApp floating chat button on all pages
+- 🔒 Error boundaries for better error handling
+- ⚡ Optimized performance with loading states
+- 📄 Complete pages: Home, Services, Pricing, About, Contact, Setup
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Set Up Environment Variables
+
+Copy `.env.local.example` to `.env.local` and fill in your Firebase credentials:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Required environment variables:
+- `NEXT_PUBLIC_FIREBASE_API_KEY`
+- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+- `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+- `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
+- `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
+- `NEXT_PUBLIC_FIREBASE_APP_ID`
+
+### 3. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                    # Next.js app directory
+│   ├── about/              # About page
+│   ├── contact/            # Contact page
+│   ├── pricing/            # Pricing page
+│   ├── services/           # Services page
+│   ├── setup/              # Chatbot setup form
+│   ├── privacy/            # Privacy policy
+│   ├── terms/              # Terms of service
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx           # Home page
+├── components/             # React components
+│   ├── Navbar.tsx         # Navigation bar
+│   ├── Footer.tsx         # Footer
+│   ├── Hero.tsx           # Hero section
+│   ├── Services.tsx       # Services section
+│   ├── Pricing.tsx        # Pricing section
+│   ├── ChatButton.tsx     # WhatsApp floating button
+│   ├── ErrorBoundary.tsx  # Error boundary component
+│   └── ...
+└── lib/                   # Utilities
+    └── firebase.ts        # Firebase configuration
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Firebase Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a new project at [Firebase Console](https://console.firebase.google.com/)
+2. Enable Firestore Database
+3. Create a web app and copy the config
+4. Update `.env.local` with your credentials
+5. (Optional) Configure Firestore rules in `firestore.rules`
 
-## Deploy on Vercel
+## Contact Information
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Email**: autohubsolution777@gmail.com
+- **Phone**: +91 9940918442
+- **Location**: Trichy, Tamil Nadu, India
+- **WhatsApp**: https://wa.me/919940918442
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Social Media
+
+- **Instagram**: [@autohub_solution777](https://www.instagram.com/autohub_solution777)
+- **YouTube**: [@autohubsolution](https://youtube.com/@autohubsolution)
+
+## Deployment
+
+This project is configured for deployment on Vercel. To deploy:
+
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy
+
+Alternatively, you can use Firebase Hosting, Netlify, or any other hosting service.
+
+## License
+
+© 2026 AutoHub Solutions. All rights reserved.
