@@ -5,10 +5,33 @@ import './HolographicUI.css';
 
 export default function HolographicUI() {
   const [isActive, setIsActive] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsActive(e.target.checked);
   };
+
+  // Error boundary for this component
+  useEffect(() => {
+    const handleError = () => setHasError(true);
+    window.addEventListener('error', handleError);
+    return () => window.removeEventListener('error', handleError);
+  }, []);
+
+  if (hasError) {
+    return (
+      <section className="py-24 bg-black relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">
+            Interactive Demo Unavailable
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Please contact us to see a live demonstration of our AI automation capabilities.
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div className={`holo-ui-section ${isActive ? 'active' : ''}`}>

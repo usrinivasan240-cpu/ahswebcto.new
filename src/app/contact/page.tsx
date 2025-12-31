@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import SectionHeading from "@/components/SectionHeading";
 import GlassCard from "@/components/GlassCard";
-import { db } from "@/lib/firebase";
+import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2, MessageCircle, AlertCircle } from "lucide-react";
+import Loading from "@/components/Loading";
 
-export default function ContactPage() {
+function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -16,6 +17,12 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+
+    if (!isFirebaseConfigured) {
+      setError("Contact form is currently unavailable. Please use WhatsApp for faster response.");
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -40,8 +47,8 @@ export default function ContactPage() {
   return (
     <div className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading 
-          title="Get In Touch" 
+        <SectionHeading
+          title="Get In Touch"
           subtitle="Have questions? We're here to help you on your automation journey."
         />
 
@@ -81,6 +88,16 @@ export default function ContactPage() {
               <h3 className="text-lg font-bold mb-4">Business Hours</h3>
               <p className="text-gray-400">Everyday: 6:00 PM – 12:00 AM IST</p>
             </div>
+
+            <a
+              href="https://wa.me/919940918442"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-xl font-bold transition-all duration-300"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
 
           <div className="lg:col-span-2">
@@ -90,7 +107,7 @@ export default function ContactPage() {
                   <CheckCircle2 className="w-16 h-16 text-accent mx-auto mb-6" />
                   <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
                   <p className="text-gray-400 mb-8">We've received your message and will get back to you soon.</p>
-                  <button 
+                  <button
                     onClick={() => setSubmitted(false)}
                     className="text-accent font-bold hover:underline"
                   >
@@ -158,6 +175,10 @@ export default function ContactPage() {
                       </>
                     )}
                   </button>
+
+                  <p className="text-gray-500 text-xs text-center">
+                    Or contact us directly via WhatsApp for faster response
+                  </p>
                 </form>
               )}
             </GlassCard>
@@ -165,5 +186,13 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <ContactForm />
+    </Suspense>
   );
 }
