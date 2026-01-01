@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import SectionHeading from "@/components/SectionHeading";
 import GlassCard from "@/components/GlassCard";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2, MessageCircle, AlertCircle } from "lucide-react";
-import Loading from "@/components/Loading";
 
 function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -190,9 +189,5 @@ function ContactForm() {
 }
 
 export default function ContactPage() {
-  return (
-    <Suspense fallback={<Loading />}>
-      <ContactForm />
-    </Suspense>
-  );
+  return <ContactForm />;
 }
