@@ -38,7 +38,7 @@ export default function SetupPage() {
     };
 
     try {
-      await addDoc(collection(db, "chatbot_requests"), data);
+      await addDoc(collection(db!, "chatbot_requests"), data);
       setSubmitted(true);
     } catch (err) {
       console.error("Error adding document: ", err);

@@ -1,5 +1,5 @@
-import { initializeApp, getApps } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { getFirestore, Firestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
@@ -11,17 +11,17 @@ const firebaseConfig = {
 };
 
 // Only initialize Firebase if required config is present
-const isFirebaseConfigured =
+const isFirebaseConfigured = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
-  firebaseConfig.appId;
+  firebaseConfig.appId
+);
 
-let app = null;
-let db = null;
+let db: Firestore | null = null;
 
 if (isFirebaseConfigured) {
   try {
-    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
     db = getFirestore(app);
   } catch (error) {
     console.error("Firebase initialization error:", error);

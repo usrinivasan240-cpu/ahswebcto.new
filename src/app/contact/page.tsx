@@ -33,7 +33,7 @@ function ContactForm() {
     };
 
     try {
-      await addDoc(collection(db, "contacts"), data);
+      await addDoc(collection(db!, "contacts"), data);
       setSubmitted(true);
     } catch (err) {
       console.error("Error adding document: ", err);
